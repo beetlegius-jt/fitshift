@@ -31,4 +31,13 @@ class User < ApplicationRecord
   enum :role, { customer: 0, company: 10, admin: 20 }, validate: true
 
   validates :role, presence: true
+  validates :owner, presence: true, unless: :admin?
+
+  def customer
+    owner if customer?
+  end
+
+  def company
+    owner if company?
+  end
 end

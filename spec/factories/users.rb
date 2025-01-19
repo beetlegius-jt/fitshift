@@ -24,6 +24,20 @@ FactoryBot.define do
   factory :user do
     email { Faker::Internet.unique.email }
     password { Faker::Internet.password }
-    role { :customer }
+
+    trait :admin do
+      role { :admin }
+      owner { nil }
+    end
+
+    trait :customer do
+      role { :customer }
+      association :owner, factory: :customer
+    end
+
+    trait :company do
+      role { :company }
+      association :owner, factory: :company
+    end
   end
 end
