@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_19_215332) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_19_220418) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -75,6 +75,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_215332) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.json "serialized_schedule", default: {}, null: false
+    t.string "schedulable_type", null: false
+    t.bigint "schedulable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["schedulable_type", "schedulable_id"], name: "index_schedules_on_schedulable"
   end
 
   create_table "users", force: :cascade do |t|

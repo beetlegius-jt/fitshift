@@ -1,0 +1,44 @@
+{
+  "start_time": {
+    "time": "2025-01-01T05:00:00.000Z",
+    "zone": -18000
+  },
+  "rrules": [
+    {
+      "validations": {
+        "day": [
+          1,
+          3,
+          5
+        ],
+        "minute_of_hour": [
+          0
+        ],
+        "hour_of_day": [
+          8
+        ]
+      },
+      "rule_type": "IceCube::WeeklyRule",
+      "interval": 1,
+      "week_start": 0
+    },
+    {
+      "validations": {
+        "day": [
+          6
+        ],
+        "minute_of_hour": [
+          0
+        ],
+        "hour_of_day": [
+          21
+        ]
+      },
+      "rule_type": "IceCube::WeeklyRule",
+      "interval": 1,
+      "week_start": 0
+    }
+  ],
+  "rtimes": [],
+  "extimes": []
+}

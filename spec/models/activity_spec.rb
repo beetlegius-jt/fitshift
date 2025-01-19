@@ -31,5 +31,6 @@ RSpec.describe Activity, type: :model do
 
   context 'relationships' do
     it { should belong_to(:company) }
+    it { should have_one(:schedule).dependent(:destroy) }
   end
 end
