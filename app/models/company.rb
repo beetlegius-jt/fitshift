@@ -27,4 +27,5 @@ class Company < ApplicationRecord
 
   has_many :users, -> { where(role: "company") }, as: :owner, dependent: :destroy
   has_many :activities, dependent: :destroy
+  has_many :attendances, dependent: :delete_all
 end

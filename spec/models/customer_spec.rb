@@ -20,5 +20,6 @@ RSpec.describe Customer, type: :model do
 
   context 'relationships' do
     it { should have_many(:users).conditions(role: "customer").dependent(:destroy) }
+    it { should have_many(:attendances).dependent(:delete_all) }
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_19_220418) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_19_224724) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -62,6 +62,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_220418) do
     t.index ["company_id"], name: "index_activities_on_company_id"
   end
 
+  create_table "attendances", force: :cascade do |t|
+    t.datetime "attended_at", precision: 0, null: false
+    t.bigint "company_id", null: false
+    t.bigint "customer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attended_at", "company_id", "customer_id"], name: "idx_on_attended_at_company_id_customer_id_c1abd4461b", unique: true
+    t.index ["company_id"], name: "index_attendances_on_company_id"
+    t.index ["customer_id"], name: "index_attendances_on_customer_id"
+  end
+
   create_table "companies", force: :cascade do |t|
     t.string "name", null: false
     t.integer "utc_offset", null: false
@@ -105,4 +116,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_220418) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "activities", "companies"
+  add_foreign_key "attendances", "companies"
+  add_foreign_key "attendances", "customers"
 end

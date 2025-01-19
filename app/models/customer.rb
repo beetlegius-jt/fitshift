@@ -13,4 +13,5 @@ class Customer < ApplicationRecord
   validates :name, presence: true
 
   has_many :users, -> { where(role: "customer") }, as: :owner, dependent: :destroy
+  has_many :attendances, dependent: :delete_all
 end
