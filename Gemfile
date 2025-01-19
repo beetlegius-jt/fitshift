@@ -67,6 +67,7 @@ group :development do
   gem "web-console"
 
   gem "annotaterb", "~> 4.13", require: false
+  gem "rails-erd", "~> 1.7"
 end
 
 group :test do
