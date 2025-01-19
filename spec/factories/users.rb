@@ -20,15 +20,10 @@
 #  index_users_on_owner                 (owner_type,owner_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
-class User < ApplicationRecord
-  belongs_to :owner, polymorphic: true, optional: true
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-
-  enum :role, { customer: 0, company: 10, admin: 20 }, validate: true
-
-  validates :role, presence: true
+FactoryBot.define do
+  factory :user do
+    email { Faker::Internet.unique.email }
+    password { Faker::Internet.password }
+    role { :customer }
+  end
 end

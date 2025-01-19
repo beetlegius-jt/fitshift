@@ -20,15 +20,18 @@
 #  index_users_on_owner                 (owner_type,owner_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
-class User < ApplicationRecord
-  belongs_to :owner, polymorphic: true, optional: true
+require 'rails_helper'
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+RSpec.describe User, type: :model do
+  context 'validations' do
+    it { should validate_presence_of(:role) }
+  end
 
-  enum :role, { customer: 0, company: 10, admin: 20 }, validate: true
+  context 'associations' do
+    it { should belong_to(:owner).optional }
+  end
 
-  validates :role, presence: true
+  context 'enumeratives' do
+    it { should define_enum_for(:role).with_values(customer: 0, company: 10, admin: 20).validating }
+  end
 end
