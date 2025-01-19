@@ -26,4 +26,5 @@ class Company < ApplicationRecord
   has_one_attached :logo
 
   has_many :users, -> { where(role: "company") }, as: :owner, dependent: :destroy
+  has_many :activities, dependent: :destroy
 end

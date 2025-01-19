@@ -36,5 +36,6 @@ RSpec.describe Company, type: :model do
 
   context 'relationships' do
     it { should have_many(:users).conditions(role: "company").dependent(:destroy) }
+    it { should have_many(:activities).dependent(:destroy) }
   end
 end
