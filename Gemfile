@@ -65,6 +65,9 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  gem "annotaterb", "~> 4.13", require: false
+  gem "rails-erd", "~> 1.7"
 end
 
 group :test do
@@ -77,3 +80,4 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+gem "ice_cube", "~> 0.17.0"

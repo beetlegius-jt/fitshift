@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_19_181659) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_19_233355) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -52,6 +52,62 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_181659) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "activities", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "duration_minutes", default: 60, null: false
+    t.integer "max_capacity", default: 15, null: false
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_activities_on_company_id"
+  end
+
+  create_table "attendances", force: :cascade do |t|
+    t.datetime "attended_at", precision: 0, null: false
+    t.bigint "company_id", null: false
+    t.bigint "customer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attended_at", "company_id", "customer_id"], name: "idx_on_attended_at_company_id_customer_id_c1abd4461b", unique: true
+    t.index ["company_id"], name: "index_attendances_on_company_id"
+    t.index ["customer_id"], name: "index_attendances_on_customer_id"
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "utc_offset", null: false
+    t.string "subdomain", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subdomain"], name: "index_companies_on_subdomain", unique: true
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.datetime "starts_at", precision: 0, null: false
+    t.bigint "activity_id", null: false
+    t.bigint "customer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_reservations_on_activity_id"
+    t.index ["customer_id"], name: "index_reservations_on_customer_id"
+    t.index ["starts_at", "customer_id", "activity_id"], name: "idx_on_starts_at_customer_id_activity_id_c502fbaf1c", unique: true
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.json "serialized_schedule", default: {}, null: false
+    t.string "schedulable_type", null: false
+    t.bigint "schedulable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["schedulable_type", "schedulable_id"], name: "index_schedules_on_schedulable"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -60,10 +116,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_181659) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role", default: 0, null: false
+    t.string "owner_type"
+    t.bigint "owner_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["owner_type", "owner_id"], name: "index_users_on_owner"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "activities", "companies"
+  add_foreign_key "attendances", "companies"
+  add_foreign_key "attendances", "customers"
+  add_foreign_key "reservations", "activities"
+  add_foreign_key "reservations", "customers"
 end
