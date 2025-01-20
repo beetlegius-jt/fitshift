@@ -18,6 +18,6 @@ FactoryBot.define do
     name { Faker::Company.name }
     logo { Rack::Test::UploadedFile.new('spec/fixtures/company.png', 'image/png') }
     utc_offset { Company::UTC_OFFSETS.sample }
-    subdomain { Faker::Internet.unique.slug }
+    subdomain { Faker::Internet.unique.domain_word }
   end
 end
