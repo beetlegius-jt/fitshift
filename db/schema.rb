@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_19_224724) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_19_233355) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -88,6 +88,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_224724) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reservations", force: :cascade do |t|
+    t.datetime "starts_at", precision: 0, null: false
+    t.bigint "activity_id", null: false
+    t.bigint "customer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_reservations_on_activity_id"
+    t.index ["customer_id"], name: "index_reservations_on_customer_id"
+    t.index ["starts_at", "customer_id", "activity_id"], name: "idx_on_starts_at_customer_id_activity_id_c502fbaf1c", unique: true
+  end
+
   create_table "schedules", force: :cascade do |t|
     t.json "serialized_schedule", default: {}, null: false
     t.string "schedulable_type", null: false
@@ -118,4 +129,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_224724) do
   add_foreign_key "activities", "companies"
   add_foreign_key "attendances", "companies"
   add_foreign_key "attendances", "customers"
+  add_foreign_key "reservations", "activities"
+  add_foreign_key "reservations", "customers"
 end

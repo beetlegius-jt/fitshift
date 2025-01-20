@@ -32,5 +32,22 @@ RSpec.describe Activity, type: :model do
   context 'relationships' do
     it { should belong_to(:company) }
     it { should have_one(:schedule).dependent(:destroy) }
+    it { should have_many(:reservations).dependent(:delete_all) }
+  end
+
+  describe '#available_at?' do
+    let(:starts_at) { Time.current }
+    let(:activity) { build(:activity, max_capacity: 1) }
+    subject { activity.available_at?(starts_at) }
+
+    context 'when there is capacity' do
+      it { is_expected.to be_truthy }
+    end
+
+    context 'when there is no capacity' do
+      before { create(:reservation, activity:, starts_at:) }
+
+      it { is_expected.to be_falsy }
+    end
   end
 end
