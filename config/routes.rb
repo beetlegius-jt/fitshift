@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
   constraints CompanyConstraint.new do
     namespace :admin do
+      resource :company, only: [ :edit, :update ]
+
+      root to: "companies#show"
     end
   end
 

@@ -28,9 +28,29 @@
 #       enabled: "ON"
 
 en:
+  activerecord:
+    attributes:
+      company:
+        name: Company name
+        subdomain: Company subdomain
+        utc_offset: UTC offset
+        logo: Logo
+  admin:
+    companies:
+      form:
+        title: Configure your company
+    base:
+      navigation_links:
+        edit_company: Configuration
   application:
     navigation_links:
       admin: Admin panel
+  helpers:
+    submit:
+      update: Save changes
+  notice:
+    update: The changes were saved
   layouts:
     user_navigation_links:
+      sign_in: Sign in
       sign_out: Sign out
