@@ -1,0 +1,7 @@
+<%= link_to admin_root_path, class: "navbar-brand" do %>
+  <% if Current.company.logo.attached? %>
+    <%= image_tag Current.company.logo.variant(:thumb), class: "img-fluid" %>
+  <% else %>
+    <%= Current.company.name %>
+  <% end %>
+<% end %>
