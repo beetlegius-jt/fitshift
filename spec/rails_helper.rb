@@ -16,6 +16,7 @@ require 'support/factory_bot'
 require 'support/shoulda'
 require 'support/system_tests'
 require 'capybara/rspec'
+require 'pundit/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
