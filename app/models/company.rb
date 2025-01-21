@@ -23,7 +23,9 @@ class Company < ApplicationRecord
   validates :subdomain, presence: true
   validates :subdomain, uniqueness: true
 
-  has_one_attached :logo
+  has_one_attached :logo do |image|
+    image.variant :thumb, resize_and_pad: [ 42, 42 ], saver: { quality: 100 }
+  end
 
   has_many :users, -> { where(role: "company") }, as: :owner, dependent: :destroy
   has_many :activities, dependent: :destroy

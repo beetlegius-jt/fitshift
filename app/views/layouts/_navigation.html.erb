@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light py-4">
+  <div class="container-fluid">
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <% if Current.company.present?%>
+        <% if Current.company.logo.attached? %>
+          <%= image_tag Current.company.logo.variant(:thumb), class: "img-fluid" %>
+        <% else %>
+          <%= Current.company.name %>
+        <% end %>
+      <% else %>
+        Fit Shift
+      <% end%>
+    <% end %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="d-none d-lg-flex navbar-nav mt-3 mt-lg-0 mb-3 mb-lg-0">
+        <%= render "navigation_links" %>
+        <%= render "layouts/user_navigation_links" %>
+      </ul>
+      <ul class="navbar-nav mt-3 mt-lg-0 mb-3 mb-lg-0 d-lg-none">
+        <%= render "navigation_links" %>
+        <%= render "layouts/user_navigation_links" %>
+      </ul>
+    </div>
+  </div>
+</nav>

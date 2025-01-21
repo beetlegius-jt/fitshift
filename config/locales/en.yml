@@ -28,4 +28,9 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  application:
+    navigation_links:
+      admin: Admin panel
+  layouts:
+    user_navigation_links:
+      sign_out: Sign out

@@ -32,6 +32,14 @@ RSpec.describe Company, type: :model do
 
   context 'attachments' do
     it { should have_one_attached(:logo) }
+
+    describe 'logo' do
+      describe "thumb" do
+        subject { create(:company).logo.variant(:thumb) }
+
+        it { is_expected.to be_a(ActiveStorage::VariantWithRecord) }
+      end
+    end
   end
 
   context 'relationships' do
