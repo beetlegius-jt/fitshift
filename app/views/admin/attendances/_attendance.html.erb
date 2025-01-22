@@ -1,0 +1,6 @@
+<%= tag.tr id: dom_id(attendance) do %>
+  <td><%= attendance.customer.name %></td>
+  <td><%= l attendance.attended_at %></td>
+
+  <td><%= link_to t(:delete), [:admin, attendance], data: { turbo_method: :delete, turbo_confirm: t(:confirm) } if policy([:admin, attendance]).destroy? %></td>
+<% end %>

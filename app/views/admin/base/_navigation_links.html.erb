@@ -1,2 +1,3 @@
 <%= nav_item t(".edit_company"), edit_admin_company_path if Current.user.company? %>
 <%= nav_item Activity, admin_activities_path if policy([:admin, Activity]).index? %>
+<%= nav_item Attendance, admin_attendances_path if policy([:admin, Attendance]).index? %>
