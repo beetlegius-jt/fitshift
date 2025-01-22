@@ -9,7 +9,7 @@ RSpec.describe ApplicationHelper, type: :helper do
 
     context 'when using a klass' do
       let(:klass) { Company }
-      let(:link) { '<li class="nav-item me-4"><a class="some-css" href="whatever">Company</a></li>' }
+      let(:link) { '<li class="nav-item me-4"><a class="some-css" href="whatever">Companies</a></li>' }
 
       it { is_expected.to eq(link) }
     end
