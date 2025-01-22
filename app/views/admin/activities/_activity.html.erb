@@ -1,0 +1,8 @@
+<%= tag.tr id: dom_id(activity) do %>
+  <td><%= activity.name %></td>
+  <td><%= activity.duration_minutes %></td>
+  <td><%= activity.max_capacity %></td>
+
+  <td><%= link_to t(:edit), [:edit, :admin, activity] if policy([:admin, activity]).update? %></td>
+  <td><%= link_to t(:delete), [:admin, activity], data: { turbo_method: :delete, turbo_confirm: t(:confirm) } if policy([:admin, activity]).destroy? %></td>
+<% end %>

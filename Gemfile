@@ -79,6 +79,7 @@ group :test do
   gem "simplecov", "~> 0.22.0", require: false
 end
 
+gem "combined_time_select", "~> 2.0"
 gem "devise", "~> 4.9"
 gem "ice_cube", "~> 0.17.0"
 gem "pundit", "~> 2.4"

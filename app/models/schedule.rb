@@ -27,4 +27,12 @@ class Schedule < ApplicationRecord
       IceCube::Schedule.new
     end
   end
+
+  def virtual_schedule
+    @virtual_schedule ||= VirtualScheduleManager.deserialize(ice_cube)
+  end
+
+  def virtual_schedule=(schedule_params)
+    self.serialized_schedule = VirtualScheduleManager.serialize(schedule_params)
+  end
 end
