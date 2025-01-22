@@ -9,7 +9,7 @@ module ErrorHandler
 
       respond_to do |format|
         format.turbo_stream { render_flash }
-        format.html { render :edit }
+        format.html { render :form }
       end
     end
   end

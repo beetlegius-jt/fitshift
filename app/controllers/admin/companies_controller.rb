@@ -6,6 +6,7 @@ module Admin
     end
 
     def edit
+      render :form
     end
 
     def update
