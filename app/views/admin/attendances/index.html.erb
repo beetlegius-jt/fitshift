@@ -1,0 +1,15 @@
+<div class="card">
+  <div class="card-header"><%= Attendance.model_name.human %></div>
+  <div class="card-body">
+    <table class='table'>
+      <thead>
+        <th><%= Attendance.human_attribute_name :customer %></th>
+        <th><%= Attendance.human_attribute_name :attended_at %></th>
+        <th></th>
+      </thead>
+      <tbody>
+        <%= render @attendances %>
+      </tbody>
+    </table>
+  </div>
+</div>

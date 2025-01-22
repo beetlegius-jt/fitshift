@@ -38,6 +38,9 @@ en:
         name: Activity name
         duration_minutes: Duration (minutes)
         max_capacity: Max capacity
+      attendance:
+        customer: Customer
+        attended_at: Date
       company:
         name: Company name
         subdomain: Company subdomain
