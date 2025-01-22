@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header"><%= Activity.model_name.human %></div>
+  <div class="card-body">
+    <table class='table'>
+      <thead>
+        <th><%= Activity.human_attribute_name :name %></th>
+        <th><%= Activity.human_attribute_name :duration_minutes %></th>
+        <th><%= Activity.human_attribute_name :max_capacity %></th>
+
+        <th colspan=2></th>
+      </thead>
+      <tbody>
+        <%= render @activities %>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= link_to t(:add, model: Activity.model_name.human.singularize), new_admin_activity_path, class: "btn btn-primary" if policy([:admin, Activity]).create? %>
+  </div>
+</div>
+
+<br>

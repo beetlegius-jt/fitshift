@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-header"><%= t '.title' %></div>
+  <%= form_with(model: [:admin, @activity]) do |form| %>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-4">
+          <%= form.label :name, class: 'form-label' %>
+          <%= form.text_field :name, autofocus: true, class: 'form-control' %>
+        </div>
+
+        <div class="col-4">
+          <%= form.label :duration_minutes, class: 'form-label' %>
+          <%= form.number_field :duration_minutes, class: 'form-control' %>
+        </div>
+
+        <div class="col-4">
+          <%= form.label :max_capacity, class: 'form-label' %>
+          <%= form.number_field :max_capacity, class: 'form-control' %>
+        </div>
+      </div>
+
+      <%= render "admin/schedules/schedule_fields", form: %>
+    </div>
+
+    <div class="card-footer">
+      <%= form.submit class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

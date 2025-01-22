@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CompanyPolicy, type: :policy do
+RSpec.describe Admin::CompanyPolicy, type: :policy do
   let(:company) { build(:company) }
 
   subject { described_class }

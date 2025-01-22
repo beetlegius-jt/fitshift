@@ -29,6 +29,8 @@ class Activity < ApplicationRecord
   has_one :schedule, as: :schedulable, dependent: :destroy
   has_many :reservations, dependent: :delete_all
 
+  accepts_nested_attributes_for :schedule
+
   def available_at?(starts_at)
     max_capacity > reservations.where(starts_at:).count
   end

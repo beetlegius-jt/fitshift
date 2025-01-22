@@ -1,0 +1,24 @@
+<div class='col-12 nested-fields mt-3'>
+  <div class="row">
+    <div class='col-6'>
+      <%= form.label :day, class: "form-label" %>
+      <%= form.weekday_select :day, { index_as_value: true, multiple: true }, { size: 7, class: "form-select" } %>
+    </div>
+    <div class="col-6">
+      <%= form.label :time, class: "form-label" %>
+      <%= form.time_select :time,
+        {
+          combined: true,
+          minute_interval: 30,
+          start_hour: 7,
+          start_minute: 0,
+          end_hour: 22,
+          end_minute: 30,
+        },
+        class: "form-select"
+      %>
+    </div>
+  </div>
+
+  <%= button_tag t('.remove_rule'), type: :button, class: "mt-2 btn btn-sm btn-secondary", data: { action: "nested-form#remove:prevent" } %>
+</div>

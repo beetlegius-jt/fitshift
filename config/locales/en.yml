@@ -28,20 +28,47 @@
 #       enabled: "ON"
 
 en:
+  add: Add %{model}
+  confirm: Are you sure?
+  edit: Edit
+  delete: Delete
   activerecord:
     attributes:
+      activity:
+        name: Activity name
+        duration_minutes: Duration (minutes)
+        max_capacity: Max capacity
       company:
         name: Company name
         subdomain: Company subdomain
         utc_offset: UTC offset
         logo: Logo
+    models:
+      activity: Activity
+      schedule: Schedule
+  activemodel:
+    attributes:
+      virtual_schedule:
+        starts_on: Start date
+        utc_offset: UTC offset
+      virtual_rule:
+        day: Days of the week
+        time: Time
   admin:
+    activities:
+      form:
+        title: Activity form
     companies:
       form:
         title: Configure your company
     base:
       navigation_links:
         edit_company: Configuration
+    schedules:
+      rule_fields:
+        remove_rule: Remove rule
+      schedule_fields:
+        add_rule: Add rule
   application:
     navigation_links:
       admin: Admin panel

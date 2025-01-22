@@ -1,0 +1,37 @@
+<%= form.fields_for :schedule do |schedule_field| %>
+  <%= schedule_field.hidden_field :id %>
+
+  <%= schedule_field.fields_for :virtual_schedule, schedule_field.object.virtual_schedule do |field| %>
+    <div class="card mb-3" data-controller="nested-form">
+      <template data-nested-form-target="template">
+        <%= field.fields_for :rules, VirtualRule.new, child_index: 'TEMPLATE_RECORD' do |rule| %>
+          <%= render 'admin/schedules/rule_fields', form: rule %>
+        <% end %>
+      </template>
+
+      <div class="card-header"><%= Schedule.model_name.human %></div>
+
+      <div class="card-body">
+        <div class="row mb-3" data-nested-form-target="container">
+          <div class="col-6">
+            <%= field.label :starts_on, class: "form-label" %>
+            <%= field.date_field :starts_on, class: "form-control" %>
+          </div>
+
+          <div class="col-6">
+            <%= field.label :utc_offset, class: "form-label" %>
+            <%= field.select :utc_offset, options_for_select(options_for_utc_offset, field.object.utc_offset), {}, { class: "form-select" } %>
+          </div>
+
+          <%= field.fields_for :rules do |rule| %>
+            <%= render 'admin/schedules/rule_fields', form: rule %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <%= button_tag t('.add_rule'), type: :button, class: "btn btn-primary", data: { action: "nested-form#add:prevent" } %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

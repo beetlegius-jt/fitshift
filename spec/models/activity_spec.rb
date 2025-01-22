@@ -33,6 +33,7 @@ RSpec.describe Activity, type: :model do
     it { should belong_to(:company) }
     it { should have_one(:schedule).dependent(:destroy) }
     it { should have_many(:reservations).dependent(:delete_all) }
+    it { should accept_nested_attributes_for(:schedule) }
   end
 
   describe '#available_at?' do

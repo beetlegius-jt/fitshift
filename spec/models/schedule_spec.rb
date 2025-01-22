@@ -33,4 +33,29 @@ RSpec.describe Schedule, type: :model do
 
     it { is_expected.to be_a(IceCube::Schedule) }
   end
+
+  describe "#virtual_schedule" do
+    let(:virtual_schedule) { instance_double("VirtualSchedule") }
+    let(:schedule) { build(:schedule) }
+
+    before { allow(VirtualScheduleManager).to receive(:deserialize).with(schedule.ice_cube).and_return(virtual_schedule) }
+
+    subject { schedule.virtual_schedule }
+
+    it { is_expected.to eq(virtual_schedule) }
+  end
+
+  describe "#virtual_schedule=" do
+    let(:serialized_schedule) { { some: "schedule" } }
+    let(:schedule) { build(:schedule) }
+    let(:params) { { some: "params" } }
+
+    before { allow(VirtualScheduleManager).to receive(:serialize).with(params).and_return(serialized_schedule) }
+
+    it "set serialized_schedule" do
+      schedule.virtual_schedule = params
+
+      expect(schedule.serialized_schedule).to eq(serialized_schedule.as_json)
+    end
+  end
 end
