@@ -1,6 +1,6 @@
 module Admin
   class BaseController < ApplicationController
-    include HasCompany
+    include HasCurrentAttributes
     include ErrorHandler
     include ActionView::RecordIdentifier
 
