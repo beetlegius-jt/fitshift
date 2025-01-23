@@ -1,9 +1,25 @@
 module Admin
   class AttendancesController < BaseController
-    before_action :set_attendance, only: [ :destroy ]
+    before_action :set_attendance, only: [ :show, :destroy ]
 
     def index
       @attendances = authorize policy_scope(Current.company.attendances).order(created_at: :desc)
+    end
+
+    def show
+    end
+
+    def new
+      @attendance = authorize Current.company.attendances.new
+
+      render :form
+    end
+
+    def create
+      @attendance = authorize Current.company.attendances.new(attendance_params)
+      @attendance.save!
+
+      redirect_to [ :admin, @attendance ]
     end
 
     def destroy
@@ -19,6 +35,10 @@ module Admin
 
     def set_attendance
       @attendance = authorize policy_scope(Current.company.attendances).find(params[:id])
+    end
+
+    def attendance_params
+      params.require(:attendance).permit(:customer_id).with_defaults(attended_at: Time.zone.now)
     end
   end
 end

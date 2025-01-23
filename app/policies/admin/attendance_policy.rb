@@ -10,6 +10,14 @@ module Admin
       owner?
     end
 
+    def show?
+      owner? && record.company == user.company
+    end
+
+    def create?
+      owner?
+    end
+
     def destroy?
       owner? && record.company == user.company
     end

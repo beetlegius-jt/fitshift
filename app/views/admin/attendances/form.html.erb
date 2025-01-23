@@ -1,0 +1,17 @@
+
+<div class="alert alert-info d-flex" role="alert">
+  <i class="bi bi-qr-code-scan display-1" style="font-size: 5em"></i>
+
+  <div class="p-3 ms-3">
+    <%= tag.h4 t('.title'), class: "alert-heading" %>
+    <%= tag.p t('.description'), class: "mb-0" %>
+  </div>
+</div>
+
+<div data-controller="scanner">
+  <%= content_tag :canvas, nil, width: 640, height: 480, 'data-scanner-target': 'canvas', class: "qr-scanner" %>
+
+  <%= form_with(model: [:admin, @attendance], data: { scanner_target: "form" }) do |form| %>
+    <%= form.hidden_field :customer_id, data: { scanner_target: 'output' } %>
+  <% end %>
+</div>

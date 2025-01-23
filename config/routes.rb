@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   constraints CompanyConstraint.new do
     namespace :admin do
       resources :activities
-      resources :attendances, only: [ :index, :destroy ]
+      resources :attendances, only: [ :index, :show, :new, :create, :destroy ]
       resource :company, only: [ :edit, :update ]
 
       root to: "companies#show"
