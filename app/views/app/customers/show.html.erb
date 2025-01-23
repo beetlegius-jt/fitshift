@@ -2,3 +2,12 @@
   <i class="bi bi-person-fill"></i>
   <%= @customer.name %>
 </h2>
+
+<div class="row">
+  <div class="col-md-4">
+    <%= QrCode.call Current.customer.id.to_s %>
+  </div>
+
+  <div class="col-md-8">
+  </div>
+</div>
