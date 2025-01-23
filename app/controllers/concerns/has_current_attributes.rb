@@ -7,6 +7,7 @@ module HasCurrentAttributes
     def set_current_attributes
       if user_signed_in?
         Current.user = current_user
+        Current.customer = current_user.customer
       end
 
       Current.company = Company.find_by(subdomain: request.subdomain)

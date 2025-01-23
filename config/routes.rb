@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   constraints CompanyConstraint.new do
+    namespace :app do
+      root to: "customers#show"
+    end
+
     namespace :admin do
       resources :activities
       resources :attendances, only: [ :index, :show, :new, :create, :destroy ]
