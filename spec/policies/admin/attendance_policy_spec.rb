@@ -7,7 +7,7 @@ RSpec.describe Admin::AttendancePolicy, type: :policy do
 
   before { Current.company = company }
 
-  permissions :index? do
+  permissions :index?, :create? do
     context "when the user is not logged in" do
       let(:user) { nil }
 
@@ -27,7 +27,7 @@ RSpec.describe Admin::AttendancePolicy, type: :policy do
     end
   end
 
-  permissions :destroy? do
+  permissions :show?, :destroy? do
     let(:attendance) { build(:attendance, company:) }
 
     context "when the user is not logged in" do

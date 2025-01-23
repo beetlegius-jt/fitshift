@@ -61,12 +61,19 @@ en:
     activities:
       form:
         title: Activity form
+    attendances:
+      form:
+        title: Scan QR code
+        description: Open your application and show your QR code to the camera
+      show:
+        welcome: Welcome
     companies:
       form:
         title: Configure your company
     base:
       navigation_links:
         edit_company: Configuration
+        qr_camera: Scan QR code
     schedules:
       rule_fields:
         remove_rule: Remove rule

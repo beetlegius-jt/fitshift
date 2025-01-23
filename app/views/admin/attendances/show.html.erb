@@ -1,0 +1,10 @@
+<div class="alert alert-primary" role="alert">
+  <h1 class="display-4 text-center mb-0">
+    <i class="bi bi-person-arms-up"></i>
+    <%= t '.welcome' %>, <%= tag.strong @attendance.customer.name %>
+  </h1>
+</div>
+
+<%= content_for :head do %>
+  <meta http-equiv="refresh" content="5; URL=<%= new_admin_attendance_url %>" />
+<% end %>
