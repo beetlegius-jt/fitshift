@@ -56,4 +56,8 @@ class ApplicationPolicy
   def owner?
     user&.company == Current.company
   end
+
+  def customer?
+    user&.customer == Current.customer
+  end
 end
