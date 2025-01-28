@@ -85,3 +85,4 @@ gem "draper", "~> 4.0"
 gem "ice_cube", "~> 0.17.0"
 gem "pundit", "~> 2.4"
 gem "rqrcode", "~> 2.2", require: false
+gem "view_component", "~> 3.21"
