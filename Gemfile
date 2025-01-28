@@ -81,6 +81,7 @@ end
 
 gem "combined_time_select", "~> 2.0"
 gem "devise", "~> 4.9"
+gem "draper", "~> 4.0"
 gem "ice_cube", "~> 0.17.0"
 gem "pundit", "~> 2.4"
 gem "rqrcode", "~> 2.2", require: false
