@@ -1,0 +1,22 @@
+<%= link_to new_app_activity_reservation_path(@activity, reservation: { starts_at: @event.starts_at.iso8601 }), data: { turbo_frame: "remote_modal", controller: "link", action: "link#open", link_active_value: @activity.available_at?(@event.starts_at) }, id: dom_id(@event), class: "link-dark link-underline-opacity-0 d-flex border-top pt-2 pb-2 pe-2" do %>
+  <div class="justify-content-center p-4">
+    <%= @event.start_time %>
+  </div>
+
+  <div>
+    <small><%= @event.start_time %> - <%= @event.end_time %></small>
+
+    <%= tag.h5 @event.activity_name, class: "mb-0" %>
+    <%= tag.small @event.status_message %>
+  </div>
+
+  <div class="ms-auto justify-content-end text-center">
+    <%= @event.status_label %>
+
+    <p class="fw-bold">
+      <i class="bi bi-person-fill"></i>
+
+      <%= @event.reservations_count %>/<%= @event.activity_max_capacity %>
+    </p>
+  </div>
+<% end %>

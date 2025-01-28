@@ -1,0 +1,17 @@
+<%= turbo_frame_tag :events_page do %>
+  <%= turbo_stream_from dom_id(Current.company, :events) %>
+
+  <div class="card mb-3">
+    <div class="card-header">
+      <%= Event.model_name.human.pluralize %>
+    </div>
+
+    <div class="card-body">
+      <p class="lead mb-0"><%= t('.today') %>, <%= l Time.zone.today, format: :agenda %></p>
+    </div>
+
+    <div id="events">
+      <%= render App::EventComponent.with_collection(@events) %>
+    </div>
+  </div>
+<% end %>

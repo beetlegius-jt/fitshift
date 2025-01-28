@@ -5,6 +5,11 @@ Rails.application.routes.draw do
 
   constraints CompanyConstraint.new do
     namespace :app do
+      resources :activities, only: [] do
+        resources :reservations, only: [ :new, :create ]
+      end
+      resources :events, only: :index
+
       root to: "customers#show"
     end
 

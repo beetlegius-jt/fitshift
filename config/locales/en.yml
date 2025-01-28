@@ -89,6 +89,10 @@ en:
         remove_rule: Remove rule
       schedule_fields:
         add_rule: Add rule
+  app:
+    events:
+      index:
+        today: Today
   application:
     navigation_links:
       admin: Admin panel
@@ -101,6 +105,9 @@ en:
     user_navigation_links:
       sign_in: Sign in
       sign_out: Sign out
+  date:
+    formats:
+      agenda: "%A %e %b"
   time:
     formats:
       hour: "%H:%M"
