@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe App::EventComponent, type: :component do
+  subject { render_inline(described_class.new(event:)).to_html }
+
   let(:activity) { create(:activity, duration_minutes: 60, max_capacity: 1) }
   let(:starts_at) { Time.current.change(hour: 10, minute: 0, second: 0) }
   let(:event) { build(:event, activity:, starts_at:) }
@@ -13,7 +15,6 @@ RSpec.describe App::EventComponent, type: :component do
   let(:status_message) { I18n.t(:open, scope: "activemodel.attributes.event.status") }
   let(:status_label) { I18n.t(:available, scope: "activemodel.attributes.event.status_label").upcase }
 
-  subject { render_inline(described_class.new(event:)).to_html }
 
   it { is_expected.to include(activity.name) }
   it { is_expected.to include(new_reservation_url) }
@@ -24,6 +25,7 @@ RSpec.describe App::EventComponent, type: :component do
 
   context "when there is a reservation" do
     before { create(:reservation, activity:, starts_at:) }
+
     let(:attendance) { "1/1" }
     let(:status_message) { I18n.t(:full, scope: "activemodel.attributes.event.status") }
     let(:status_label) { I18n.t(:full, scope: "activemodel.attributes.event.status_label").upcase }

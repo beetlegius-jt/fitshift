@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe "Admin::Companies", type: :system do
+RSpec.describe "Admin::Companies" do
   let(:subdomain) { "something" }
   let(:company) { create(:company, subdomain:) }
   let(:user) { create(:user, :company, owner: company) }
 
   before { sign_in(user) }
 
-  it "can update the company configuration" do
+  it "can update the company configuration", :aggregate_failures do
     visit admin_root_url(subdomain:)
 
     within("#web-nav") do
@@ -20,7 +20,7 @@ RSpec.describe "Admin::Companies", type: :system do
     fill_in :company_name, with: new_name
     fill_in :company_subdomain, with: new_subdomain
 
-    click_button I18n.t(:update, scope: "helpers.submit")
+    click_on I18n.t(:update, scope: "helpers.submit")
 
     expect(page).to have_current_path(edit_admin_company_path)
     expect(page).to have_content I18n.t(:update, scope: :notice)
@@ -31,7 +31,7 @@ RSpec.describe "Admin::Companies", type: :system do
     expect(company.subdomain).to eq(new_subdomain)
   end
 
-  it "shows errors when attempting to update a company with invalid attributes" do
+  it "shows errors when attempting to update a company with invalid attributes", :aggregate_failures do
     visit admin_root_url(subdomain:)
 
     within("#web-nav") do
@@ -40,7 +40,7 @@ RSpec.describe "Admin::Companies", type: :system do
 
     fill_in :company_name, with: nil
 
-    click_button I18n.t(:update, scope: "helpers.submit")
+    click_on I18n.t(:update, scope: "helpers.submit")
 
     message = "Validation failed: Company name can't be blank"
 

@@ -23,3 +23,15 @@ require:
 
 AllCops:
     NewCops: enable
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/IndexedLet:
+  Max: 2
+
+RSpec/ExampleLength:
+  Enabled: false

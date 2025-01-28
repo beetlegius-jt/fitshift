@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe "Admin::Activities", type: :system do
+RSpec.describe "Admin::Activities" do
   let(:subdomain) { "something" }
   let(:company) { create(:company, subdomain:) }
   let(:user) { create(:user, :company, owner: company) }
 
   before { sign_in(user) }
 
-  it "can create an activity" do
+  it "can create an activity", :aggregate_failures do
     visit admin_root_url(subdomain:)
 
     within("#web-nav") do
@@ -30,7 +30,7 @@ RSpec.describe "Admin::Activities", type: :system do
     fill_in :activity_schedule_attributes_virtual_schedule_starts_on, with: starts_on
     select utc_offset_text, from: :activity_schedule_attributes_virtual_schedule_utc_offset
 
-    click_button I18n.t(:create, scope: "helpers.submit", model: "Activity")
+    click_on I18n.t(:create, scope: "helpers.submit", model: "Activity")
 
     expect(page).to have_current_path(admin_activities_path)
     expect(page).to have_content I18n.t(:create, scope: :notice)
@@ -48,7 +48,7 @@ RSpec.describe "Admin::Activities", type: :system do
     expect(activity.schedule.virtual_schedule.utc_offset).to eq(utc_offset)
   end
 
-  it "shows errors when attempting to create an activity with invalid attributes" do
+  it "shows errors when attempting to create an activity with invalid attributes", :aggregate_failures do
     visit admin_root_url(subdomain:)
 
     within("#web-nav") do
@@ -59,7 +59,7 @@ RSpec.describe "Admin::Activities", type: :system do
 
     fill_in :activity_name, with: nil
 
-    click_button I18n.t(:create, scope: "helpers.submit", model: "Activity")
+    click_on I18n.t(:create, scope: "helpers.submit", model: "Activity")
 
     message = "Validation failed: Activity name can't be blank"
 

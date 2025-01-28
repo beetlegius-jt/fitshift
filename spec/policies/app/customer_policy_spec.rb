@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe App::CustomerPolicy, type: :policy do
+  subject { described_class }
+
   let(:customer) { build(:customer) }
 
-  subject { described_class }
 
   before { Current.customer = customer }
 

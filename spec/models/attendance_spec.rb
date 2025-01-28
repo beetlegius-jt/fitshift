@@ -22,13 +22,13 @@
 #
 require 'rails_helper'
 
-RSpec.describe Attendance, type: :model do
-  context 'validations' do
-    it { should validate_presence_of(:attended_at) }
+RSpec.describe Attendance do
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:attended_at) }
   end
 
-  context 'relationships' do
-    it { should belong_to(:company) }
-    it { should belong_to(:customer) }
+  describe 'relationships' do
+    it { is_expected.to belong_to(:company) }
+    it { is_expected.to belong_to(:customer) }
   end
 end

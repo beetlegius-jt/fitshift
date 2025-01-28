@@ -2,12 +2,13 @@ require 'rails_helper'
 
 RSpec.describe QrCode, type: :model do
   describe ".call" do
+    subject { described_class.call(text, offset:) }
+
     let(:text) { "whatever" }
     let(:offset) { 100 }
-    let(:qr_code) { instance_double("RQRCode::QRCode") }
+    let(:qr_code) { instance_double(RQRCode::QRCode) }
     let(:result) { "some valid html" }
 
-    subject { described_class.call(text, offset:) }
 
     before do
       allow(RQRCode::QRCode).to receive(:new).with(text).and_return(qr_code)

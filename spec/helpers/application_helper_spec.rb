@@ -1,11 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe ApplicationHelper, type: :helper do
+RSpec.describe ApplicationHelper do
   describe 'nav_item' do
+    subject { helper.nav_item(klass, path, **opts) }
+
     let(:path) { 'whatever' }
     let(:opts) { { class: 'some-css' } }
 
-    subject { helper.nav_item(klass, path, **opts) }
 
     context 'when using a klass' do
       let(:klass) { Company }
@@ -23,9 +24,9 @@ RSpec.describe ApplicationHelper, type: :helper do
   end
 
   describe 'timeago' do
-    let(:format) { :long }
-
     subject { helper.timeago(date, format:) }
+
+    let(:format) { :long }
 
     context "when the date is empty" do
       let(:date) { "" }

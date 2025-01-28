@@ -17,6 +17,6 @@ FactoryBot.define do
   factory :schedule do
     serialized_schedule { JSON.load_file("spec/fixtures/schedule.json") }
 
-    association :schedulable, factory: :activity
+    schedulable factory: %i[activity]
   end
 end
