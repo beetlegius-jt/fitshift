@@ -3,10 +3,6 @@
 require "rails_helper"
 
 RSpec.describe App::EventComponent, type: :component do
-  include ActionView::Helpers::TagHelper
-  include Rails.application.routes.url_helpers
-  include ApplicationHelper
-
   let(:activity) { create(:activity, duration_minutes: 60, max_capacity: 1) }
   let(:starts_at) { Time.current.change(hour: 10, minute: 0, second: 0) }
   let(:event) { build(:event, activity:, starts_at:) }

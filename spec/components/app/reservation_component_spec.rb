@@ -3,10 +3,6 @@
 require "rails_helper"
 
 RSpec.describe App::ReservationComponent, type: :component do
-  include ActionView::Helpers::TagHelper
-  include Rails.application.routes.url_helpers
-  include ApplicationHelper
-
   let(:activity) { create(:activity) }
   let(:starts_at) { Time.current.change(hour: 10, minute: 0, second: 0) }
   let(:reservation) { create(:reservation, activity:, starts_at:) }
