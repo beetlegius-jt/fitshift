@@ -21,4 +21,26 @@ RSpec.describe ApplicationHelper, type: :helper do
       it { is_expected.to eq(link) }
     end
   end
+
+  describe 'timeago' do
+    let(:format) { :long }
+
+    subject { helper.timeago(date, format:) }
+
+    context "when the date is empty" do
+      let(:date) { "" }
+
+      it { is_expected.to be_nil }
+    end
+
+    context "when the date is present" do
+      let(:date) { Time.current }
+      let(:formatted_date) { I18n.l(date, format:) }
+      let(:iso8601_date) { date.iso8601 }
+
+      it { is_expected.to include(formatted_date) }
+      it { is_expected.to include('data-controller="timeago"') }
+      it { is_expected.to include("data-timeago-datetime-value=\"#{iso8601_date}\"") }
+    end
+  end
 end

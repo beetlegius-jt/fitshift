@@ -14,8 +14,11 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'support/devise'
 require 'support/factory_bot'
+require 'support/shared_examples'
 require 'support/shoulda'
 require 'support/system_tests'
+require 'support/turbo'
+require 'support/view_component'
 require 'capybara/rspec'
 require 'pundit/rspec'
 

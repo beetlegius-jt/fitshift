@@ -1,0 +1,16 @@
+<ul class="list-group mb-3">
+  <li class="list-group-item d-flex justify-content-between lh-lg">
+    <%= tag.span t(".date") %>
+    <%= tag.span l(event.starts_at.to_date, format: :agenda), class: "text-body-secondary" %>
+  </li>
+
+  <li class="list-group-item d-flex justify-content-between lh-lg">
+    <%= tag.span t(".start") %>
+    <%= tag.span event.start_time, class: "text-body-secondary" %>
+  </li>
+
+  <li class="list-group-item d-flex justify-content-between lh-lg">
+    <%= tag.span t(".finish") %>
+    <%= tag.span event.end_time, class: "text-body-secondary" %>
+  </li>
+</ul>

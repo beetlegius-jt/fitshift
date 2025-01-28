@@ -7,7 +7,7 @@ module App
     # https://gist.github.com/Burgestrand/4b4bc22f31c8a95c425fc0e30d7ef1f5
 
     def show?
-      user&.customer == Current.customer
+      customer?
     end
 
     class Scope < ApplicationPolicy::Scope

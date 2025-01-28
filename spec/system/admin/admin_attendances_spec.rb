@@ -16,12 +16,14 @@ RSpec.describe "Admin::Attendances", type: :system do
       find("a[href='#{admin_attendances_path}']").click
     end
 
+    formatted_attended_at = I18n.l(attendance.attended_at.in_time_zone(company.utc_offset))
+
     expect(page).to have_content attendance.customer.name
-    expect(page).to have_content I18n.l(attendance.attended_at)
+    expect(page).to have_content formatted_attended_at
 
     within("##{dom_id(attendance)}") { click_on I18n.t(:delete) }
 
     expect(page).not_to have_content attendance.customer.name
-    expect(page).not_to have_content I18n.l(attendance.attended_at)
+    expect(page).not_to have_content formatted_attended_at
   end
 end

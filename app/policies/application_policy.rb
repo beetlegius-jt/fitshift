@@ -56,4 +56,12 @@ class ApplicationPolicy
   def owner?
     user&.company == Current.company
   end
+
+  def customer?
+    user&.customer == Current.customer
+  end
+
+  def resource_owner?
+    record.try(:customer) == Current.customer
+  end
 end

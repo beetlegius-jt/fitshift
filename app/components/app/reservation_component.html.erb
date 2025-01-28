@@ -1,0 +1,7 @@
+<%= link_to [:app, @reservation], id: dom_id(@reservation), data: { turbo_frame: "remote_modal" }, class: "bd-callout bd-callout-info d-flex justify-content-between align-items-start link-dark link-underline-opacity-0 mt-0" do %>
+  <div class="me-auto">
+    <strong class="me-2"><%= @reservation.start_time %></strong>
+    <%= @reservation.activity.name %>
+  </div>
+  <span><%= helpers.timeago @reservation.starts_at %></span>
+<% end %>

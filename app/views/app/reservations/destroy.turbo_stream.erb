@@ -1,0 +1,4 @@
+<%= turbo_stream.update :reservations_count, reservations.count %>
+<%= turbo_stream.remove dom_id(@reservation) %>
+
+<%= render "update_flash" %>
