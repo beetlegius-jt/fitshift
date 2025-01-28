@@ -53,8 +53,4 @@ class Event
   def to_key
     [ activity_id, starts_at.to_i ]
   end
-
-  def to_partial_path
-    "events/event"
-  end
 end

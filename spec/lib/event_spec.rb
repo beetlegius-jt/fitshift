@@ -130,10 +130,4 @@ RSpec.describe Event, type: :model do
 
     it { is_expected.to eq(key) }
   end
-
-  describe '#to_partial_path' do
-    subject { event.to_partial_path }
-
-    it { is_expected.to eq("events/event") }
-  end
 end
