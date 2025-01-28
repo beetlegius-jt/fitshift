@@ -7,9 +7,9 @@ RSpec.describe EventBroadcaster, type: :broadcaster do
   let(:stream) { ActionView::RecordIdentifier.dom_id(activity.company, :events) }
   let(:target) { ActionView::RecordIdentifier.dom_id(event) }
 
-  describe ".call" do
-    subject { described_class.call(activity, starts_at) }
+  describe "#call" do
+    subject(:broadcaster) { described_class.new(activity, starts_at) }
 
-    it { expect { subject }.to have_broadcasted_turbo_stream_to(stream, action: :replace, target:) }
+    it { expect { broadcaster.call }.to have_broadcasted_turbo_stream_to(stream, action: :replace, target:) }
   end
 end

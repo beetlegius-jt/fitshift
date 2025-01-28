@@ -15,17 +15,17 @@
 #
 require 'rails_helper'
 
-RSpec.describe Schedule, type: :model do
-  context 'validations' do
-    it { should validate_presence_of(:serialized_schedule) }
+RSpec.describe Schedule do
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:serialized_schedule) }
   end
 
-  context 'relationships' do
-    it { should belong_to(:schedulable) }
+  describe 'relationships' do
+    it { is_expected.to belong_to(:schedulable) }
   end
 
-  context 'delegations' do
-    it { should delegate_method(:occurrences_between).to(:ice_cube) }
+  describe 'delegations' do
+    it { is_expected.to delegate_method(:occurrences_between).to(:ice_cube) }
   end
 
   describe '#ice_cube' do
@@ -35,12 +35,13 @@ RSpec.describe Schedule, type: :model do
   end
 
   describe "#virtual_schedule" do
-    let(:virtual_schedule) { instance_double("VirtualSchedule") }
+    subject { schedule.virtual_schedule }
+
+    let(:virtual_schedule) { instance_double(VirtualSchedule) }
     let(:schedule) { build(:schedule) }
 
     before { allow(VirtualScheduleManager).to receive(:deserialize).with(schedule.ice_cube).and_return(virtual_schedule) }
 
-    subject { schedule.virtual_schedule }
 
     it { is_expected.to eq(virtual_schedule) }
   end

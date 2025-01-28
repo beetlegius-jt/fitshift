@@ -22,33 +22,33 @@
 #
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
-  context 'validations' do
-    it { should validate_presence_of(:role) }
+RSpec.describe User do
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:role) }
 
     context 'when it is a customer' do
       subject { build(:user, :customer) }
 
-      it { should validate_presence_of(:owner) }
+      it { is_expected.to validate_presence_of(:owner) }
     end
 
     context 'when it is a company' do
       subject { build(:user, :company) }
 
-      it { should validate_presence_of(:owner) }
+      it { is_expected.to validate_presence_of(:owner) }
     end
   end
 
-  context 'associations' do
+  describe 'associations' do
     context 'when it is a admin' do
       subject { build(:user, :admin) }
 
-      it { should belong_to(:owner).optional }
+      it { is_expected.to belong_to(:owner).optional }
     end
   end
 
-  context 'enumeratives' do
-    it { should define_enum_for(:role).with_values(customer: 0, company: 10, admin: 20).validating }
+  describe 'enumeratives' do
+    it { is_expected.to define_enum_for(:role).with_values(customer: 0, company: 10, admin: 20).validating }
   end
 
   describe '#customer' do

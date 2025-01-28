@@ -24,7 +24,7 @@ FactoryBot.define do
     duration_minutes { [ 30, 60, 90 ].sample }
     max_capacity { [ 5, 10, 15, 18, 20 ].sample }
 
-    association :company
+    company
     schedule { association(:schedule, schedulable: instance) }
   end
 end

@@ -23,7 +23,7 @@
 FactoryBot.define do
   factory :attendance do
     attended_at { Time.current }
-    association :company
-    association :customer
+    company
+    customer
   end
 end

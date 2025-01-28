@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-  let(:utc_offset) { -18000 }
-  let(:company) { build(:company, utc_offset:) }
+  let(:company) { build(:company, utc_offset: -18000) }
 
   let(:duration_minutes) { 60 }
   let(:max_capacity) { 10 }
@@ -15,20 +14,20 @@ RSpec.describe Event, type: :model do
   before { Time.zone = company.utc_offset }
   after { Time.zone = nil }
 
-  context 'delegations' do
+  describe 'delegations' do
     subject { event }
 
-    it { should delegate_method(:id).to(:activity).with_prefix }
-    it { should delegate_method(:name).to(:activity).with_prefix }
-    it { should delegate_method(:duration_minutes).to(:activity).with_prefix }
-    it { should delegate_method(:max_capacity).to(:activity).with_prefix }
+    it { is_expected.to delegate_method(:id).to(:activity).with_prefix }
+    it { is_expected.to delegate_method(:name).to(:activity).with_prefix }
+    it { is_expected.to delegate_method(:duration_minutes).to(:activity).with_prefix }
+    it { is_expected.to delegate_method(:max_capacity).to(:activity).with_prefix }
   end
 
   describe '.from_activities' do
+    subject { described_class.from_activities([ activity ], from:, to:).as_json }
+
     let(:from) { starts_at }
     let(:to) { 1.minute.after(from) }
-
-    subject { described_class.from_activities([ activity ], from:, to:).as_json }
 
     it { is_expected.to eq([ event.as_json ]) }
   end
@@ -40,28 +39,28 @@ RSpec.describe Event, type: :model do
   end
 
   describe '#ends_at' do
+    subject { event.ends_at }
+
     let(:starts_at) { Time.zone.parse("2025-01-01T09:00:00Z") }
     let(:ends_at) { Time.zone.parse("2025-01-01T10:00:00Z") }
-
-    subject { event.ends_at }
 
     it { is_expected.to eq(ends_at) }
   end
 
   describe '#reservation_start_time' do
+    subject { event.reservation_start_time }
+
     let(:starts_at) { Time.zone.parse("2025-01-01T09:00:00Z") }
     let(:hours_for_reservation) { 4 }
     let(:reservation_start_time) { Time.zone.parse("2025-01-01T05:00:00Z") }
-
-    subject { event.reservation_start_time }
 
     it { is_expected.to eq(reservation_start_time) }
   end
 
   describe '#reservations_count' do
-    before { create(:reservation, activity:, starts_at:) }
-
     subject { event.reservations_count }
+
+    before { create(:reservation, activity:, starts_at:) }
 
     it { is_expected.to eq(1) }
   end
@@ -76,24 +75,23 @@ RSpec.describe Event, type: :model do
     end
 
     context 'when it is open' do
-      before { allow(event).to receive(:full?).and_return(false) }
-      before { allow(event).to receive(:open?).and_return(true) }
+      before { allow(event).to receive_messages(full?: false, open?: true) }
 
       it { is_expected.to eq(Event::OPEN) }
     end
 
     context 'when it is available' do
-      before { allow(event).to receive(:full?).and_return(false) }
-      before { allow(event).to receive(:open?).and_return(false) }
+      before { allow(event).to receive_messages(full?: false, open?: false) }
 
       it { is_expected.to eq(Event::AVAILABLE) }
     end
   end
 
   describe '#full?' do
+    subject { event.full? }
+
     let(:max_capacity) { 1 }
 
-    subject { event.full? }
 
     context "when there are no reservations" do
       it { is_expected.to be_falsey }
@@ -125,9 +123,10 @@ RSpec.describe Event, type: :model do
   end
 
   describe '#to_key' do
+    subject { event.to_key }
+
     let(:key) { [ activity.id, starts_at.to_i ] }
 
-    subject { event.to_key }
 
     it { is_expected.to eq(key) }
   end

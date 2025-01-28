@@ -23,7 +23,7 @@
 FactoryBot.define do
   factory :reservation do
     starts_at { activity.schedule.ice_cube.first }
-    association :customer
-    association :activity
+    customer
+    activity
   end
 end

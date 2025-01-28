@@ -32,12 +32,12 @@ FactoryBot.define do
 
     trait :customer do
       role { :customer }
-      association :owner, factory: :customer
+      owner factory: %i[customer]
     end
 
     trait :company do
       role { :company }
-      association :owner, factory: :company
+      owner factory: %i[company]
     end
   end
 end

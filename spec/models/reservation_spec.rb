@@ -22,21 +22,25 @@
 #
 require 'rails_helper'
 
-RSpec.describe Reservation, type: :model do
+RSpec.describe Reservation do
   include ActiveJob::TestHelper
 
-  context 'validations' do
-    it { should validate_presence_of(:starts_at) }
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:starts_at) }
 
-    context 'uniqueness' do
+    describe 'uniqueness' do
       subject { build(:reservation) }
 
-      it { should validate_uniqueness_of(:starts_at).scoped_to(:customer_id, :activity_id) }
+      it { is_expected.to validate_uniqueness_of(:starts_at).scoped_to(:customer_id, :activity_id) }
     end
 
     describe 'activity_is_available' do
-      subject { build(:reservation) }
-      before { allow(subject.activity).to receive(:available_at?).with(subject.starts_at).and_return(available) }
+      subject { build(:reservation, activity:, starts_at:) }
+
+      let(:activity) { build(:activity) }
+      let(:starts_at) { Time.zone.now.round }
+
+      before { allow(activity).to receive(:available_at?).with(starts_at).and_return(available) }
 
       context 'when the activity is available' do
         let(:available) { true }
@@ -47,41 +51,43 @@ RSpec.describe Reservation, type: :model do
       context 'when the activity is not available' do
         let(:available) { false }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
     end
   end
 
-  context 'relationships' do
-    it { should belong_to(:customer) }
-    it { should belong_to(:activity) }
+  describe 'relationships' do
+    it { is_expected.to belong_to(:customer) }
+    it { is_expected.to belong_to(:activity) }
   end
 
-  context 'scopes' do
+  describe 'scopes' do
     describe '.from_company' do
+      subject { described_class.from_company(company) }
+
       let(:company) { create(:company) }
       let(:activity) { create(:activity, company:) }
       let!(:reservation) { create(:reservation, activity:) }
-      let!(:another_reservation) { create(:reservation) }
 
-      subject { described_class.from_company(company) }
+      before { create(:reservation) }
 
-      it { is_expected.to match_array([ reservation ]) }
+      it { is_expected.to contain_exactly(reservation) }
     end
 
     describe '.future' do
+      subject { described_class.future }
+
       let(:starts_at) { Time.current.round }
       let!(:reservation1) { create(:reservation, starts_at:) }
       let!(:reservation2) { create(:reservation, starts_at: 1.hour.before(starts_at)) }
-      let!(:another_reservation) { create(:reservation, starts_at: 1.second.before(reservation2.starts_at)) }
 
-      subject { described_class.future }
+      before { create(:reservation, starts_at: 1.second.before(reservation2.starts_at)) }
 
-      it { travel_to(starts_at) { is_expected.to match_array([ reservation1, reservation2 ]) } }
+      it { travel_to(starts_at) { is_expected.to contain_exactly(reservation1, reservation2) } }
     end
   end
 
-  context 'callbacks' do
+  describe 'callbacks' do
     describe "broadcast_event" do
       let(:activity) { create(:activity) }
       let(:starts_at) { Time.current.round }

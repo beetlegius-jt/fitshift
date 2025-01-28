@@ -31,6 +31,7 @@ RSpec.describe EventDecorator do
 
     context "when the event is full" do
       before { create(:reservation, activity:, starts_at:) }
+
       let(:label) { I18n.t(:full, scope: "activemodel.attributes.event.status") }
 
       it { is_expected.to eq(label) }
@@ -56,6 +57,7 @@ RSpec.describe EventDecorator do
 
     context "when the event is full" do
       before { create(:reservation, activity:, starts_at:) }
+
       let(:label) { I18n.t(:full, scope: "activemodel.attributes.event.status_label").upcase }
 
       it { is_expected.to include(label) }

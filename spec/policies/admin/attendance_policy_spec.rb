@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Admin::AttendancePolicy, type: :policy do
+  subject { described_class }
+
   let(:company) { build(:company) }
 
-  subject { described_class }
 
   before { Current.company = company }
 

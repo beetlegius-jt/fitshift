@@ -20,26 +20,28 @@
 #
 require 'rails_helper'
 
-RSpec.describe Activity, type: :model do
-  context 'validations' do
-    it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:duration_minutes) }
-    it { should validate_presence_of(:max_capacity) }
-    it { should validate_numericality_of(:duration_minutes).is_greater_than(0).only_integer }
-    it { should validate_numericality_of(:max_capacity).is_greater_than(0).only_integer }
+RSpec.describe Activity do
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:duration_minutes) }
+    it { is_expected.to validate_presence_of(:max_capacity) }
+    it { is_expected.to validate_numericality_of(:duration_minutes).is_greater_than(0).only_integer }
+    it { is_expected.to validate_numericality_of(:max_capacity).is_greater_than(0).only_integer }
   end
 
-  context 'relationships' do
-    it { should belong_to(:company) }
-    it { should have_one(:schedule).dependent(:destroy) }
-    it { should have_many(:reservations).dependent(:delete_all) }
-    it { should accept_nested_attributes_for(:schedule) }
+  describe 'relationships' do
+    it { is_expected.to belong_to(:company) }
+    it { is_expected.to have_one(:schedule).dependent(:destroy) }
+    it { is_expected.to have_many(:reservations).dependent(:delete_all) }
+    it { is_expected.to accept_nested_attributes_for(:schedule) }
   end
 
   describe '#available_at?' do
+    subject { activity.available_at?(starts_at) }
+
     let(:starts_at) { Time.current }
     let(:activity) { build(:activity, max_capacity: 1) }
-    subject { activity.available_at?(starts_at) }
+
 
     context 'when there is capacity' do
       it { is_expected.to be_truthy }
