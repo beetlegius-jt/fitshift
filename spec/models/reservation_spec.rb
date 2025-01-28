@@ -77,7 +77,7 @@ RSpec.describe Reservation, type: :model do
 
       subject { described_class.future }
 
-      it { is_expected.to match_array([ reservation1, reservation2 ]) }
+      it { travel_to(starts_at) { is_expected.to match_array([ reservation1, reservation2 ]) } }
     end
   end
 

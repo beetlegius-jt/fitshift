@@ -13,6 +13,7 @@ RSpec.describe Event, type: :model do
   let(:event) { build(:event, activity:, starts_at:, hours_for_reservation:) }
 
   before { Time.zone = company.utc_offset }
+  after { Time.zone = nil }
 
   context 'delegations' do
     subject { event }

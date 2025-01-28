@@ -29,7 +29,7 @@ class Reservation < ApplicationRecord
   belongs_to :activity
 
   scope :from_company, ->(company_id) { joins(:activity).where(activity: { company_id: }) }
-  scope :future, -> { where(starts_at: 1.hour.ago.round..) }
+  scope :future, -> { where(starts_at: 1.hour.ago.floor..) }
 
   after_commit :broadcast_event
 
