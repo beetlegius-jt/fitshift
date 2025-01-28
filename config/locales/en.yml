@@ -92,8 +92,12 @@ en:
       schedule_fields:
         add_rule: Add rule
   app:
+    agendas:
+      show:
+        title: Agenda
     events:
       index:
+        agenda: Show agenda
         today: Today
       event:
         date: Date

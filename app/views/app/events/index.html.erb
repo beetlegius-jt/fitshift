@@ -3,6 +3,8 @@
 
   <div class="card mb-3">
     <div class="card-header">
+      <%= link_to t(".agenda"), app_agenda_path, class: "text-sm float-end", data: { turbo_frame: :remote_modal } if policy([:app, :agenda]).show? %>
+
       <%= Event.model_name.human.pluralize %>
     </div>
 

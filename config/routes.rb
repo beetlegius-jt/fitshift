@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   constraints CompanyConstraint.new do
     namespace :app do
+      resource :agenda, only: :show
       resources :activities, only: [] do
         resources :reservations, only: [ :new, :create ]
       end

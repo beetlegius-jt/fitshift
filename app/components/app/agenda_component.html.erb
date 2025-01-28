@@ -1,0 +1,23 @@
+<nav class="nav nav-pills nav-fill" role="tablist">
+  <% @weekdays.each do |day| %>
+    <%= button_tag day.strftime("%A"), class: ["nav-link", ("active" if day.today?)], data: { bs_toggle: :tab, bs_target: "##{day}" } %>
+  <% end %>
+</nav>
+
+<hr>
+
+<div class="tab-content">
+  <% @grouped_events.each_pair do |day, events| %>
+    <%= tag.div id: day, class: ["tab-pane", ("active" if day.today?)], role: :tabpanel do %>
+      <ul class="list-group">
+        <% events.each do |event| %>
+          <li class="list-group-item d-flex justify-content-between lh-lg align-items-center">
+            <%= event.activity_name %>
+
+            <small><%= event.start_time %> - <%= event.end_time %></small>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+</div>
