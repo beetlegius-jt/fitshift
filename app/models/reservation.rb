@@ -28,11 +28,20 @@ class Reservation < ApplicationRecord
   belongs_to :customer
   belongs_to :activity
 
+  scope :from_company, ->(company_id) { joins(:activity).where(activity: { company_id: }) }
+  scope :future, -> { where(starts_at: 1.hour.ago.round..) }
+
+  after_commit :broadcast_event
+
   private
 
   def activity_is_available
     return unless starts_at && activity
 
     errors.add(:activity, :taken) unless activity.available_at?(starts_at)
+  end
+
+  def broadcast_event
+    BroadcastEventJob.perform_later(activity, starts_at)
   end
 end

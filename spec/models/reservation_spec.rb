@@ -23,6 +23,8 @@
 require 'rails_helper'
 
 RSpec.describe Reservation, type: :model do
+  include ActiveJob::TestHelper
+
   context 'validations' do
     it { should validate_presence_of(:starts_at) }
 
@@ -53,5 +55,43 @@ RSpec.describe Reservation, type: :model do
   context 'relationships' do
     it { should belong_to(:customer) }
     it { should belong_to(:activity) }
+  end
+
+  context 'scopes' do
+    describe '.from_company' do
+      let(:company) { create(:company) }
+      let(:activity) { create(:activity, company:) }
+      let!(:reservation) { create(:reservation, activity:) }
+      let!(:another_reservation) { create(:reservation) }
+
+      subject { described_class.from_company(company) }
+
+      it { is_expected.to match_array([ reservation ]) }
+    end
+
+    describe '.future' do
+      let(:starts_at) { Time.current.round }
+      let!(:reservation1) { create(:reservation, starts_at:) }
+      let!(:reservation2) { create(:reservation, starts_at: 1.hour.before(starts_at)) }
+      let!(:another_reservation) { create(:reservation, starts_at: 1.second.before(reservation2.starts_at)) }
+
+      subject { described_class.future }
+
+      it { is_expected.to match_array([ reservation1, reservation2 ]) }
+    end
+  end
+
+  context 'callbacks' do
+    describe "broadcast_event" do
+      let(:activity) { create(:activity) }
+      let(:starts_at) { Time.current.round }
+      let(:job) { BroadcastEventJob }
+      let(:args) { [ activity, starts_at ] }
+      let(:queue) { "default" }
+
+      it "broadcasts event job on creation" do
+        assert_enqueued_with(job:, args:, queue:) { create(:reservation, activity:, starts_at:) }
+      end
+    end
   end
 end

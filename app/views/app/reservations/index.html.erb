@@ -1,0 +1,11 @@
+<%= turbo_frame_tag :reservations_page do %>
+  <div class="card mb-3">
+    <div class="card-header">
+      <%= Reservation.model_name.human.pluralize %> <%= tag.span reservations.count, class: "badge text-bg-info", id: "reservations_count" %>
+    </div>
+
+    <div id="reservations">
+      <%= render App::ReservationComponent.with_collection(@reservations) %>
+    </div>
+  </div>
+<% end %>

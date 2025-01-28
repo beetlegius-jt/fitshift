@@ -10,11 +10,11 @@ class ApplicationController < ActionController::Base
     render turbo_stream: turbo_stream.update(:flash, partial: "layouts/flash")
   end
 
-  def notice_message(key = action_name)
-    t(key, scope: :notice)
+  def notice_message(key = action_name, **opts)
+    t(key, scope: :notice, **opts)
   end
 
-  def alert_message(key = action_name)
-    t(key, scope: :alert)
+  def alert_message(key = action_name, **opts)
+    t(key, scope: :alert, **opts)
   end
 end

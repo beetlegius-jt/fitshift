@@ -29,6 +29,7 @@
 
 en:
   add: Add %{model}
+  cancel: Cancel
   confirm: Are you sure?
   edit: Edit
   delete: Delete
@@ -48,6 +49,7 @@ en:
         logo: Logo
     models:
       activity: Activity
+      reservation: Reservation
       schedule: Schedule
   activemodel:
     attributes:
@@ -93,14 +95,25 @@ en:
     events:
       index:
         today: Today
+      event:
+        date: Date
+        start: Start
+        finish: Finish
+    reservations:
+      show:
+        unreserve: Delete reservation
   application:
     navigation_links:
       admin: Admin panel
   helpers:
     submit:
+      reservation:
+        create: Reserve
       update: Save changes
   notice:
+    create: The %{model} was created
     update: The changes were saved
+    destroy: The %{model} was deleted
   layouts:
     user_navigation_links:
       sign_in: Sign in

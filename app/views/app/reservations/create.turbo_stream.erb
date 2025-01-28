@@ -1,0 +1,4 @@
+<%= turbo_stream.update :reservations_count, reservations.count %>
+<%= turbo_stream.append :reservations, App::ReservationComponent.new(reservation: @reservation) %>
+
+<%= render "update_flash" %>

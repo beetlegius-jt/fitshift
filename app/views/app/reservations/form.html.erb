@@ -1,0 +1,23 @@
+<%= turbo_frame_tag :remote_modal, target: :_top do %>
+  <div class="modal" data-controller="modal" data-bs-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><%= @event.activity_name %></h5>
+        </div>
+
+        <div class="modal-body">
+          <%= render @event %>
+        </div>
+
+        <div class="modal-footer">
+          <%= tag.span t(:cancel), class: "btn btn-secondary", data: { bs_dismiss: :modal } %>
+          <%= form_with(model: [:app, @activity, @reservation], data: { action: "turbo:submit-end->modal#disconnect" }) do |form| %>
+            <%= form.hidden_field :starts_at %>
+            <%= form.submit class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
