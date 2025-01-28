@@ -51,12 +51,22 @@ en:
       schedule: Schedule
   activemodel:
     attributes:
+      event:
+        status:
+          open: ¡Open enrollment!
+          full: Full
+          available_html: Available in %{date}
+        status_label:
+          full: Full
+          available: Available
       virtual_schedule:
         starts_on: Start date
         utc_offset: UTC offset
       virtual_rule:
         day: Days of the week
         time: Time
+    models:
+      event: Event
   admin:
     activities:
       form:
@@ -91,3 +101,6 @@ en:
     user_navigation_links:
       sign_in: Sign in
       sign_out: Sign out
+  time:
+    formats:
+      hour: "%H:%M"
