@@ -7,6 +7,7 @@ module Admin
     end
 
     def show
+      set_metadata title: @attendance.customer.name
     end
 
     def new

@@ -14,6 +14,8 @@ module Admin
     end
 
     def edit
+      set_metadata title: @activity.name
+
       render :form
     end
 
