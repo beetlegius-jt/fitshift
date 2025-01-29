@@ -14,9 +14,7 @@
     <%= @event.status_label %>
 
     <p class="fw-bold">
-      <i class="bi bi-person-fill"></i>
-
-      <%= @event.reservations_count %>/<%= @event.activity_max_capacity %>
+      <%= helpers.bi_icon "person-fill", text: @event.availability %>
     </p>
   </div>
 <% end %>

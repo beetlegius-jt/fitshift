@@ -14,4 +14,8 @@ module ApplicationHelper
       content, title:, data: { controller: "timeago", timeago_datetime_value: date.iso8601 }
     )
   end
+
+  def bi_icon(*args, **opts)
+    BootstrapIcon.call(*args, **opts)
+  end
 end

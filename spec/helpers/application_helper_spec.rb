@@ -44,4 +44,16 @@ RSpec.describe ApplicationHelper do
       it { is_expected.to include("data-timeago-datetime-value=\"#{iso8601_date}\"") }
     end
   end
+
+  describe 'bi_icon' do
+    subject { helper.bi_icon(*args, **opts) }
+
+    let(:args) { [ "some", "thing" ] }
+    let(:opts) { { some: :option } }
+    let(:icon) { "some-icon" }
+
+    before { allow(BootstrapIcon).to receive(:call).with(*args, **opts).and_return(icon) }
+
+    it { is_expected.to eq(icon) }
+  end
 end
