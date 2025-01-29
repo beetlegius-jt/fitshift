@@ -1,7 +1,6 @@
 <div class="alert alert-primary" role="alert">
   <h1 class="display-4 text-center mb-0">
-    <i class="bi bi-person-arms-up"></i>
-    <%= t '.welcome' %>, <%= tag.strong @attendance.customer.name %>
+    <%= bi_icon "person-arms-up", text: t('.welcome') %> <%= tag.strong @attendance.customer.name %>
   </h1>
 </div>
 
