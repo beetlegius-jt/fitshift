@@ -1,6 +1,7 @@
 module Admin
   class CompaniesController < BaseController
     before_action :set_company
+    before_action :set_company_metadata
 
     def show
     end
@@ -28,6 +29,10 @@ module Admin
 
     def company_params
       params.require(:company).permit(:name, :subdomain, :utc_offset, :logo)
+    end
+
+    def set_company_metadata
+      set_metadata title: @company.name
     end
   end
 end

@@ -71,9 +71,17 @@ en:
       event: Event
   admin:
     activities:
+      index:
+        title: List of activities
+      new:
+        title: Add activity
       form:
         title: Activity form
     attendances:
+      index:
+        title: List of attendances
+      new:
+        title: Scan QR code
       form:
         title: Scan QR code
         description: Open your application and show your QR code to the camera
@@ -109,6 +117,9 @@ en:
   application:
     navigation_links:
       admin: Admin panel
+  devise:
+    sessions:
+      title: Sign in
   helpers:
     submit:
       reservation:
