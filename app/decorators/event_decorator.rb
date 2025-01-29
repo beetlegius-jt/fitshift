@@ -27,6 +27,10 @@ class EventDecorator < ApplicationDecorator
     h.tag.span status_label_anchor.upcase, class: [ "d-block", "badge", "mb-1", status_label_class ]
   end
 
+  def availability
+    "#{reservations_count}/#{activity_max_capacity}"
+  end
+
   private
 
   def status_label_anchor

@@ -63,4 +63,10 @@ RSpec.describe EventDecorator do
       it { is_expected.to include(label) }
     end
   end
+
+  describe "#availability" do
+    subject { event.availability }
+
+    it { is_expected.to eq("0/1") }
+  end
 end
