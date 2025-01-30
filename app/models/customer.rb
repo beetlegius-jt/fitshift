@@ -15,4 +15,6 @@ class Customer < ApplicationRecord
   has_many :users, -> { where(role: "customer") }, as: :owner, dependent: :destroy
   has_many :attendances, dependent: :delete_all
   has_many :reservations, dependent: :delete_all
+
+  accepts_nested_attributes_for :users
 end

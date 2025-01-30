@@ -44,5 +44,6 @@ RSpec.describe Company do
     it { is_expected.to have_many(:users).conditions(role: "company").dependent(:destroy) }
     it { is_expected.to have_many(:activities).dependent(:destroy) }
     it { is_expected.to have_many(:attendances).dependent(:delete_all) }
+    it { is_expected.to accept_nested_attributes_for(:users) }
   end
 end
