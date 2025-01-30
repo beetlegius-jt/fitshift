@@ -1,10 +1,8 @@
 module Admin
   class BaseController < ApplicationController
-    include HasCurrentAttributes
-    include ErrorHandler
     include ActionView::RecordIdentifier
 
-    before_action :authenticate_user!
+    prepend_before_action :authenticate_user!
     after_action :verify_authorized
 
     def policy_scope(scope)
