@@ -153,6 +153,35 @@ en:
       register: Register
       sign_in: Sign in
       sign_out: Sign out
+    public:
+      base:
+        sitename: Fit Shift
+        site_description: >
+          Reserve your spot easily and secure your workout. We allow you to schedule your sessions efficiently, avoiding overcrowding and ensuring a safe and comfortable environment for all. Don't miss the chance to train at the time that suits you best!
+  public:
+    site:
+      index:
+        title: Welcome
+        description: Reserve your workout spot easily, avoid overcrowding, and train at your preferred time with our efficient booking system
+        keywords: gym booking system, fit shift, reserve workout spot, gym schedule, personalized workout time, fitness reservations
+        hero:
+          title: Welcome to Fit Shift
+          subtitle: Let's get total control over your gym
+          cta: Get Started
+        register:
+          label: Register
+          title: Get Started
+          title_description: now
+        info:
+          reservation:
+            title: Easy Reservation
+            description: Book your workout session online in just a few clicks
+          overcrowding:
+            title: Avoid Overcrowding
+            description: Manage gym capacity for a more comfortable experience
+          scheduling:
+            title: Flexible Scheduling
+            description: Choose from multiple time slots to fit your schedule
 
   date:
     formats:

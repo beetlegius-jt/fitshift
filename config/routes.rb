@@ -27,6 +27,12 @@ Rails.application.routes.draw do
     root to: "companies#show", as: :company_root
   end
 
+  scope module: :public do
+    resources :companies, only: :create
+
+    root to: "site#index"
+  end
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

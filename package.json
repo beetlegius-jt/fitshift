@@ -16,7 +16,9 @@
   "scripts": {
     "build:css:compile": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
     "build:css:prefix": "postcss ./app/assets/builds/application.css --use=autoprefixer --output=./app/assets/builds/application.css",
-    "build:css": "yarn build:css:compile && yarn build:css:prefix",
+    "build:css:compile:public": "sass ./app/assets/stylesheets/public.scss:./app/assets/builds/public.css --no-source-map --load-path=node_modules",
+    "build:css:prefix:public": "postcss ./app/assets/builds/public.css --use=autoprefixer --output=./app/assets/builds/public.css",
+    "build:css": "yarn build:css:compile && yarn build:css:prefix && yarn build:css:compile:public && yarn build:css:prefix:public",
     "watch:css": "nodemon --watch ./app/assets/stylesheets/ --ext scss --exec \"yarn build:css\""
   },
   "browserslist": [

@@ -1,0 +1,66 @@
+<section id="hero" class="hero section dark-background">
+
+  <%= image_tag "public/hero-bg.jpg" %>
+
+  <div class="container text-center">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h2><%= t ".hero.title" %></h2>
+        <p><%= t ".hero.subtitle" %></p>
+
+        <%= link_to t(".hero.cta"), "#register", class: "btn-get-started" %>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section id="register" class="contact section">
+
+  <div class="container section-title">
+    <h2><%= t ".register.label" %></h2>
+    <p><span><%= t ".register.title" %></span> <span class="description-title"><%= t ".register.title_description" %><br></span></p>
+  </div>
+
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-4">
+        <div class="info-item d-flex">
+          <%= bi_icon "calendar-day", class: "flex-shrink-0" %>
+          <div>
+            <h3><%= t ".info.reservation.title" %></h3>
+            <p><%= t ".info.reservation.description" %></p>
+          </div>
+        </div>
+
+        <div class="info-item d-flex">
+          <%= bi_icon "people-fill", class: "flex-shrink-0" %>
+          <div>
+            <h3><%= t ".info.overcrowding.title" %></h3>
+            <p><%= t ".info.overcrowding.description" %></p>
+          </div>
+        </div>
+
+        <div class="info-item d-flex">
+          <%= bi_icon :calendar3, class: "flex-shrink-0" %>
+          <div>
+            <h3><%= t ".info.scheduling.title" %></h3>
+            <p><%= t ".info.scheduling.description" %></p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-lg-8">
+        <%= turbo_frame_tag :flash do %>
+          <%= render "layouts/flash" %>
+        <% end %>
+
+        <%= render "form", company: @company %>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
