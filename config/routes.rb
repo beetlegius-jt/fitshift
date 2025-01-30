@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
       root to: "companies#show"
     end
+
+    resources :customers, only: [ :new, :create ]
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

@@ -47,6 +47,13 @@ en:
         subdomain: Company subdomain
         utc_offset: UTC offset
         logo: Logo
+      customer:
+        name: Customer name
+        picture: Picture
+      user:
+        email: Email
+        password: Password
+        password_confirmation: Password confirmation
     models:
       activity: Activity
       reservation: Reservation
@@ -117,11 +124,15 @@ en:
   application:
     navigation_links:
       admin: Admin panel
-  devise:
-    sessions:
-      title: Sign in
+  customers:
+    new:
+      title: Register now
+    form:
+      title: Register form
   helpers:
     submit:
+      customer:
+        create: Register
       reservation:
         create: Reserve
       update: Save changes
@@ -131,8 +142,10 @@ en:
     destroy: The %{model} was deleted
   layouts:
     user_navigation_links:
+      register: Register
       sign_in: Sign in
       sign_out: Sign out
+
   date:
     formats:
       agenda: "%A %e %b"
