@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-header"><%= t '.title' %></div>
+
+  <%= form_with(model: @customer) do |form| %>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-6">
+          <%= form.label :name, class: 'form-label' %>
+          <%= form.text_field :name, autofocus: true, class: 'form-control' %>
+        </div>
+
+        <div class="col-6">
+          <%= form.label :picture, class: 'form-label' %>
+          <%= form.file_field :picture, class: 'form-control' %>
+        </div>
+      </div>
+
+      <%= form.fields_for :users, @customer.users.new do |field| %>
+        <div class="row mb-3">
+          <div class="col-4">
+            <%= field.label :email, class: 'form-label' %>
+            <%= field.email_field :email, autocomplete: :off, class: 'form-control' %>
+          </div>
+
+          <div class="col-4">
+            <%= field.label :password, class: 'form-label' %>
+            <%= field.password_field :password, autocomplete: :off, class: 'form-control' %>
+          </div>
+
+          <div class="col-4">
+            <%= field.label :password_confirmation, class: 'form-label' %>
+            <%= field.password_field :password_confirmation, autocomplete: :off, class: 'form-control' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="card-footer">
+      <%= form.submit class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

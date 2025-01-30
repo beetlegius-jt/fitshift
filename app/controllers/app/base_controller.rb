@@ -1,9 +1,6 @@
 module App
   class BaseController < ApplicationController
-    include HasCurrentAttributes
-    include ErrorHandler
-
-    before_action :authenticate_user!
+    prepend_before_action :authenticate_user!
     before_action :protect
     after_action :verify_authorized
 

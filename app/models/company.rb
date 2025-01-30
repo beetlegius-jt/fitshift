@@ -25,9 +25,12 @@ class Company < ApplicationRecord
 
   has_one_attached :logo do |image|
     image.variant :thumb, resize_and_pad: [ 42, 42 ], saver: { quality: 100 }
+    image.variant :main, resize_and_pad: [ 128, 128 ], saver: { quality: 100 }
   end
 
   has_many :users, -> { where(role: "company") }, as: :owner, dependent: :destroy
   has_many :activities, dependent: :destroy
   has_many :attendances, dependent: :delete_all
+
+  accepts_nested_attributes_for :users
 end

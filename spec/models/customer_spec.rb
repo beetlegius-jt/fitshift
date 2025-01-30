@@ -22,5 +22,6 @@ RSpec.describe Customer do
     it { is_expected.to have_many(:users).conditions(role: "customer").dependent(:destroy) }
     it { is_expected.to have_many(:attendances).dependent(:delete_all) }
     it { is_expected.to have_many(:reservations).dependent(:delete_all) }
+    it { is_expected.to accept_nested_attributes_for(:users) }
   end
 end

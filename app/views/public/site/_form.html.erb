@@ -1,0 +1,35 @@
+<%= form_with(model: company, html: { class: "php-email-form" }) do |form| %>
+  <div class="row gy-4">
+    <div class="col-md-4">
+      <%= form.text_field :name, placeholder: true, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-4">
+      <%= form.text_field :subdomain, placeholder: true, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-4">
+      <%= form.select :utc_offset, options_for_utc_offset, { prompt: Company.human_attribute_name(:utc_offset) }, class: 'form-select' %>
+    </div>
+
+    <hr>
+
+    <%= form.fields_for :users do |field| %>
+      <div class="col-4">
+        <%= field.email_field :email, placeholder: true, autocomplete: "email", class: "form-control" %>
+      </div>
+
+      <div class="col-4">
+        <%= field.password_field :password, placeholder: true, autocomplete: "new-password", class: "form-control" %>
+      </div>
+
+      <div class="col-4">
+        <%= field.password_field :password_confirmation, placeholder: true, autocomplete: "new-password", class: "form-control" %>
+      </div>
+    <% end%>
+
+    <div class="col-4 text-center">
+      <%= form.button %>
+    </div>
+  </div>
+<% end %>
