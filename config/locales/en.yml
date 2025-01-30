@@ -124,6 +124,12 @@ en:
   application:
     navigation_links:
       admin: Admin panel
+  companies:
+    show:
+      description: >
+        Unlock a world of exclusive benefits by registering today! When you sign up, you'll gain access to personalized features, early updates, and special offers that are designed to enhance your experience. Don’t miss out on the chance to be part of a community where your needs are prioritized. Register now and take the first step toward a more tailored and rewarding experience—it's quick, easy, and absolutely worth it!
+      register: Register now
+      sign_in: Sign in
   customers:
     new:
       title: Register now
@@ -131,6 +137,8 @@ en:
       title: Register form
   helpers:
     submit:
+      company:
+        create: Register
       customer:
         create: Register
       reservation:
