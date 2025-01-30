@@ -38,6 +38,12 @@ RSpec.describe Company do
 
       it { is_expected.to be_a(ActiveStorage::VariantWithRecord) }
     end
+
+    describe 'logo#main' do
+      subject { create(:company).logo.variant(:main) }
+
+      it { is_expected.to be_a(ActiveStorage::VariantWithRecord) }
+    end
   end
 
   describe 'relationships' do
