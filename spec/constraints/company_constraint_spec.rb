@@ -7,8 +7,7 @@ RSpec.describe CompanyConstraint, type: :model do
     let(:subdomain) { "whatever" }
     let(:request) { instance_double(ActionDispatch::Request) }
 
-    before { allow(request).to receive(:subdomain).and_return(subdomain) }
-
+    before { allow(request).to receive(:subdomains).and_return([ subdomain ]) }
 
     context "when there is a company with the given subdomain" do
       before { create(:company, subdomain:) }

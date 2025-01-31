@@ -87,7 +87,8 @@ production:
     <<: *default
     database: fitshift_production
     username: fitshift
-    password: <%= ENV["FITSHIFT_DATABASE_PASSWORD"] %>
+    password: <%= Rails.application.credentials.dig(:postgres, :password) %>
+    host: fitshift-db
   cache:
     <<: *primary_production
     database: fitshift_production_cache
