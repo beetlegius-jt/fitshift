@@ -10,7 +10,7 @@ module HasCurrentAttributes
         Current.customer = current_user.customer
       end
 
-      Current.company = Company.find_by(subdomain: request.subdomain)
+      Current.company = Company.find_by(subdomain: request.subdomains.first)
     end
   end
 end
