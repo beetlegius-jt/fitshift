@@ -53,6 +53,15 @@ env:
     # Log everything from Rails
     # RAILS_LOG_LEVEL: debug
 
+    DD_SITE: "datadoghq.eu"
+    # DD_TRACE_AGENT_URL: "unix:///var/run/datadog/apm.socket"
+    # DD_DOGSTATSD_URL: "unix:///var/run/datadog/dsd.socket"
+    # Optional
+    # DD_LOGS_INJECTION: "true"
+    # DD_RUNTIME_METRICS_ENABLED: "true"
+    # DD_TRACE_SAMPLE_RATE: "1"
+    # DD_PROFILING_ENABLED: "true"
+
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
 # "bin/kamal logs -r job" will tail logs from the first server in the job section.
 aliases:
@@ -62,10 +71,17 @@ aliases:
   dbc: app exec --interactive --reuse "bin/rails dbconsole"
 
 
+# DataDog APM labels
+# https://docs.datadoghq.com/tracing/guide/tutorial-enable-python-container-agent-host/
+labels:
+  com.datadoghq.tags.service: fitshift
+
+
 # Use a persistent storage volume for sqlite database files and local Active Storage files.
 # Recommended to change this to a mounted volume path that is backed up off server.
 volumes:
   - "fitshift_storage:/rails/storage"
+  - "/var/run/datadog:/var/run/datadog"
 
 
 # Bridge fingerprinted assets, like JS and CSS, between versions to avoid
@@ -114,3 +130,63 @@ builder:
 #     port: 6379
 #     directories:
 #       - data:/data
+
+accessories:
+  db:
+    image: postgres:17
+    host: 192.168.0.1
+    port: 127.0.0.1:5432:5432
+    env:
+      clear:
+        POSTGRES_USER: fitshift
+        POSTGRES_DB: fitshift_production
+      secret:
+        - POSTGRES_PASSWORD
+    directories:
+      - data:/var/lib/postgresql/data
+  monitoring:
+    image: gcr.io/datadoghq/agent:7
+    volumes:
+      # Explanation on volumes:
+      #   https://docs.datadoghq.com/containers/docker/log/?tab=dockercompose#installation
+      # DataDog APM
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/proc/:/host/proc/:ro"
+      - "/sys/fs/cgroup/:/host/sys/fs/cgroup:ro"
+      # DataDog Unix Socket Support
+      #   client speaks StatsD only?
+      #   https://docs.datadoghq.com/developers/dogstatsd/unix_socket/?tab=docker#socat-proxy
+      #   socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
+      - "/var/run/datadog:/var/run/datadog"
+      # DataDog Logs
+      - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
+      - "/opt/fitshift-monitoring/run:/opt/fitshift-monitoring/run:rw" # NOTE(liamvdv): careful, {service}-monitoring will be kamal given container name.
+    options:
+      pid: host
+      cgroupns: host
+    env:
+      clear:
+        # DataDog APM
+        DD_APM_ENABLED: "true"
+        DD_APM_RECEIVER_SOCKET: "/var/run/datadog/apm.socket"
+        DD_APM_NON_LOCAL_TRAFFIC: "true"
+
+        # DataDog Logs
+        # DD_LOGS_ENABLED: "true"
+        # DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL: "true"
+        # DD_CONTAINER_EXCLUDE_LOGS: "image:datadog/agent:*"
+
+        # DataDog DogStatsD Metrics
+        DD_DOGSTATSD_SOCKET: "/var/run/datadog/dsd.socket"
+        DD_DOGSTATSD_NON_LOCAL_TRAFFIC: "true"
+        DD_DOGSTATSD_ORIGIN_DETECTION: "true"
+        DD_PROCESS_AGENT_ENABLED: "true" # https://docs.datadoghq.com/containers/docker/?tab=standard#optional-collection-agents
+
+        # DataDog General Config
+        DD_SITE: "datadoghq.eu"
+      secret:
+        - DD_API_KEY
+        - DD_ENV
+    # install as sidecar on hosts in
+    roles:
+      - web
