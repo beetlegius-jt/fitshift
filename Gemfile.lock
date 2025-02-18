@@ -382,8 +382,9 @@ GEM
       rubocop-minitest
       rubocop-performance
       rubocop-rails
-    rubocop-rspec (3.4.0)
-      rubocop (~> 1.61)
+    rubocop-rspec (3.5.0)
+      lint_roller (~> 1.1)
+      rubocop (~> 1.72, >= 1.72.1)
     rubocop-rspec_rails (2.30.0)
       rubocop (~> 1.61)
       rubocop-rspec (~> 3, >= 3.0.1)
@@ -514,7 +515,7 @@ DEPENDENCIES
   rubocop-performance (~> 1.24)
   rubocop-rails (~> 2.29)
   rubocop-rails-omakase
-  rubocop-rspec (~> 3.4)
+  rubocop-rspec (~> 3.5)
   rubocop-rspec_rails (~> 2.30)
   selenium-webdriver
   shoulda-matchers (~> 6.4)
