@@ -54,7 +54,7 @@ group :development, :test do
   gem "rubocop-rspec", "~> 3.5", require: false
   gem "rubocop-performance", "~> 1.24", require: false
   gem "rubocop-rspec_rails", "~> 2.30", require: false
-  gem "rubocop-capybara", "~> 2.21", require: false
+  gem "rubocop-capybara", "~> 2.22", require: false
   gem "rubocop-factory_bot", "~> 2.27", require: false
   gem "rubocop-faker", "~> 1.3", require: false
 
