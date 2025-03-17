@@ -5,9 +5,9 @@ inherit_gem:
 
 require:
   - rubocop-rspec_rails
-  - rubocop-capybara
 
 plugins:
+  - rubocop-capybara
   - rubocop-factory_bot
   - rubocop-faker
   - rubocop-rspec
