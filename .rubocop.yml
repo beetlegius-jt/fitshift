@@ -3,14 +3,12 @@ inherit_gem:
   rubocop-rails-omakase: rubocop.yml
   pundit: config/rubocop-rspec.yml
 
-require:
-  - rubocop-rspec_rails
-
 plugins:
   - rubocop-capybara
   - rubocop-factory_bot
   - rubocop-faker
   - rubocop-rspec
+  - rubocop-rspec_rails
 
 # Overwrite or add rules to create your own house style
 #
