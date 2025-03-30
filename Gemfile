@@ -88,4 +88,4 @@ gem "ice_cube", "~> 0.17.0"
 gem "pundit", "~> 2.5"
 gem "rack-cors", "~> 2.0"
 gem "rqrcode", "~> 2.2", require: false
-gem "view_component", "~> 3.21"
+gem "view_component", "~> 3.22"
