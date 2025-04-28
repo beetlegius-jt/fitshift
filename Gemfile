@@ -76,7 +76,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 
-  gem "shoulda-matchers", "~> 6.4"
+  gem "shoulda-matchers", "~> 6.5"
   gem "simplecov", "~> 0.22.0", require: false
 end
 
