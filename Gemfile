@@ -86,6 +86,6 @@ gem "devise", "~> 4.9"
 gem "draper", "~> 4.0"
 gem "ice_cube", "~> 0.17.0"
 gem "pundit", "~> 2.5"
-gem "rack-cors", "~> 2.0"
+gem "rack-cors", "~> 3.0"
 gem "rqrcode", "~> 3.1", require: false
 gem "view_component", "~> 3.22"
