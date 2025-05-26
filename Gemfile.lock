@@ -109,8 +109,8 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
-    datadog (2.15.0)
-      datadog-ruby_core_source (~> 3.4)
+    datadog (2.16.0)
+      datadog-ruby_core_source (~> 3.4, >= 3.4.1)
       libdatadog (~> 16.0.1.1.0)
       libddwaf (~> 1.22.0.0.2)
       logger
@@ -493,7 +493,7 @@ DEPENDENCIES
   capybara
   combined_time_select (~> 2.0)
   cssbundling-rails
-  datadog (~> 2.15)
+  datadog (~> 2.16)
   debug
   devise (~> 4.9)
   draper (~> 4.0)
