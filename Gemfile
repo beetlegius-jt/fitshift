@@ -52,7 +52,7 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
   gem "rubocop-rspec", "~> 3.6", require: false
-  gem "rubocop-performance", "~> 1.25", require: false
+  gem "rubocop-performance", "~> 1.26", require: false
   gem "rubocop-rspec_rails", "~> 2.31", require: false
   gem "rubocop-capybara", "~> 2.22", require: false
   gem "rubocop-factory_bot", "~> 2.27", require: false
