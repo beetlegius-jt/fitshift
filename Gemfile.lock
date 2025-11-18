@@ -400,7 +400,7 @@ GEM
     rubocop-rspec (3.8.0)
       lint_roller (~> 1.1)
       rubocop (~> 1.81)
-    rubocop-rspec_rails (2.31.0)
+    rubocop-rspec_rails (2.32.0)
       lint_roller (~> 1.1)
       rubocop (~> 1.72, >= 1.72.1)
       rubocop-rspec (~> 3.5)
@@ -533,7 +533,7 @@ DEPENDENCIES
   rubocop-rails (~> 2.34)
   rubocop-rails-omakase
   rubocop-rspec (~> 3.8)
-  rubocop-rspec_rails (~> 2.31)
+  rubocop-rspec_rails (~> 2.32)
   selenium-webdriver
   shoulda-matchers (~> 7.0)
   simplecov (~> 0.22.0)

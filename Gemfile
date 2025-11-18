@@ -53,7 +53,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem "rubocop-rspec", "~> 3.8", require: false
   gem "rubocop-performance", "~> 1.26", require: false
-  gem "rubocop-rspec_rails", "~> 2.31", require: false
+  gem "rubocop-rspec_rails", "~> 2.32", require: false
   gem "rubocop-capybara", "~> 2.22", require: false
   gem "rubocop-factory_bot", "~> 2.28", require: false
   gem "rubocop-faker", "~> 1.3", require: false
