@@ -221,8 +221,7 @@ GEM
       benchmark
       logger
     mini_mime (1.1.5)
-    minitest (6.0.0)
-      prism (~> 1.5)
+    minitest (5.27.0)
     msgpack (1.8.0)
     net-imap (0.5.12)
       date
@@ -519,6 +518,7 @@ DEPENDENCIES
   image_processing (~> 1.14)
   importmap-rails
   kamal
+  minitest (~> 5.27)
   pg (~> 1.6)
   propshaft
   puma (>= 5.0)
