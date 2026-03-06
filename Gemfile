@@ -84,7 +84,7 @@ end
 
 gem "combined_time_select", "~> 2.0"
 gem "datadog", "~> 2.24", require: "datadog/auto_instrument"
-gem "devise", "~> 4.9"
+gem "devise", "~> 5.0"
 gem "draper", "~> 4.0"
 gem "ice_cube", "~> 0.17.0"
 gem "pundit", "~> 2.5"
