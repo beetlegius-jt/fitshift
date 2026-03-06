@@ -83,7 +83,7 @@ group :test do
 end
 
 gem "combined_time_select", "~> 2.0"
-gem "datadog", "~> 2.24", require: "datadog/auto_instrument"
+gem "datadog", "~> 2.29", require: "datadog/auto_instrument"
 gem "devise", "~> 5.0"
 gem "draper", "~> 4.0"
 gem "ice_cube", "~> 0.17.0"
